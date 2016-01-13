@@ -1,0 +1,168 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li class="active">Facturas</li>
+			</ul>
+			<div class="panel-heading">
+				<h4>Lista de Facturación Pendiente</h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div id="divMsjeExito" class="msjs-alert" hidden="hidden">
+								<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+								<h5>
+									<i class="fa fa-check-circle"></i>
+									<a class="alert-link" href="javascript:void(0)" id="aMsjeExito"></a>
+								</h5>
+								
+							</div>
+						</div>
+					</div>
+					<?php // if ($user->nivel==4) { ?>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-right">
+								<button class="btn btn-sm btn-primary" type="button" id="facturar"><i class="fa fa-plus fa-fw"></i>Facturar</button>
+							</div>
+						</div>
+					</div>
+					<?php //} ?>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 500px; width: 100%;" ></div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+								<strong>Lista de Facturas Realizadas</strong>
+								<!-- <h5></h5> -->
+							</div>
+							<?php // if ($user->nivel==4) { ?>
+								<div class="pull-right">
+								<button class="btn btn-sm btn-warning" type="button" id="edit"><i class="fa fa-pencil fa-fw"></i> Editar</button>
+								<button class="btn btn-sm btn-danger" type="button" id="delete"><i class="fa fa-trash-o fa-fw"></i> Eliminar</button>
+							</div>	
+							<?php // } ?>
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid_facturas" style="height: 500px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal Facturar -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal form-bordered" id="testForm" data-toggle="validator" action="" method="post" />
+			<input type="hidden" name="id" id="id">
+			<input type="hidden" name="planpago_id" id="planpago_id">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-4 control-label"><strong>Linea:</strong></label>
+					<div class="col-md-8" >
+						<p class="form-control-static" id="linea"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label"><strong>Estación:</strong></label>
+					<div class="col-md-8" >
+						<p class="form-control-static" id="estacion"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label"><strong>Cliente / Razón Social:</strong></label>
+					<div class="col-md-8" >
+						<p class="form-control-static" id="razon_social"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label"><strong>Contrato:</strong></label>
+					<div class="col-md-8" >
+						<p class="form-control-static" id="contrato"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label"><strong>Producto:</strong></label>
+					<div class="col-md-8" >
+						<p class="form-control-static" id="producto"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label"><strong>Fecha Programado:</strong></label>
+					<div class="col-md-8" >
+						<p class="form-control-static" id="fecha_programado"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label"><strong>Monto Programado Bs.:</strong></label>
+					<div class="col-md-8" >
+						<p class="form-control-static" id="monto_reprogramado"></p>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+				<label class="col-md-4 control-label"><strong>Nro Factura:</strong></label>
+					<div class="col-md-8">
+						<input id="nro_factura" name="nro_factura" class="form-control" type="text" placeholder="Nro Factura" required>
+					</div>
+				</div>
+				<div class="form-group">
+				<label class="col-md-4 control-label"><strong>Fecha Factura:</strong></label>
+					<div class="col-md-8">
+						<input type="text" id="fecha_factura" name="fecha_factura" class="form-control" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" required/>
+					</div>
+				</div>
+				<div class="form-group">
+				<label class="col-md-4 control-label"><strong>Fecha Entrega Factura:</strong></label>
+					<div class="col-md-8">
+						<input type="text" id="fecha_recepcion_cliente" name="fecha_recepcion_cliente" class="form-control" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy"/>
+					</div>
+				</div>
+				<div class="form-group">
+				<label class="col-md-4 control-label"><strong>Monto Facturado:</strong></label>
+					<div class="col-md-8">
+						<input id="monto_factura" name="monto_factura" class="form-control" type="text" placeholder="Monto Facturado Bs." required>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<style type="text/css">
+	.datepicker{
+		z-index:1151 !important;
+	}
+</style>

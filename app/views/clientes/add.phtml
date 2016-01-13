@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h4>Registro de personas</h4>
+            </div>
+            <div class="panel-body">        
+                <div class="tab-content">
+                    <!-- <div id="domshortcuttiles" class="tab-pane active"> -->
+                    <div class="row">
+                        <div class="panel panel-info">
+
+                            <div class="panel-body">
+                                <div class="alert alert-info">
+                                    <p>Llene correctamente los datos del formulario, los campos con (<span class="text-danger">*</span>) son obligatorios.</p>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <form action="page_forms_validation.php" method="post" class="form-horizontal form-bordered" onsubmit="return false;" />
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="masked_date">Date</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="masked_date" name="masked_date" class="form-control" placeholder="dd/mm/yyyy" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="masked_date2">Date 2</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="masked_date2" name="masked_date2" class="form-control" placeholder="dd-mm-yyyy" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="masked_phone">Phone</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="masked_phone" name="masked_phone" class="form-control" placeholder="(999) 999-9999" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="masked_phone_ext">Phone + Ext</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="masked_phone_ext" name="masked_phone_ext" class="form-control" placeholder="(999) 999-9999? x99999" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="masked_taxid">Tax ID</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="masked_taxid" name="masked_taxid" class="form-control" placeholder="99-9999999" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="masked_ssn">SSN</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="masked_ssn" name="masked_ssn" class="form-control" placeholder="999-99-9999" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="masked_pkey">Product Key</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="masked_pkey" name="masked_pkey" class="form-control" placeholder="a*-999-a999" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-8 col-md-offset-4">
+                                                <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-ok"></i> Submit</button>
+                                                <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group" >
+                                            <label class="col-md-3 control-label">Fecha Inicio</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="fecha_inicio" name="fecha_inicio" class="form-control " data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="/assets/js/vendor/jquery-1.11.0.min.js"%3E%3C/script%3E'));</script>
+<script>$(function() { 
+    $("#fecha_inicio").datepicker({
+        autoclose: true,
+    });
+    // FormsValidation.init(); 
+});</script>
+

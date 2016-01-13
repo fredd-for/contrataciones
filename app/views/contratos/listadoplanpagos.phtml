@@ -1,0 +1,110 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<div class="panel-heading">
+				<h4>Contrato Nro <strong><?php echo $contrato->contrato ?></strong></h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-borderless table-striped">
+								<tr>
+									<td width="15%"><strong>Cliente Razón Social</strong></td>
+									<td><?php echo $contrato->razon_social ?></td>
+									<td><strong>Contrato Nro</strong></td>
+									<td><?php echo $contrato->contrato ?></td>
+									<td><strong>Fecha Contrato</strong></td>
+									<td><?php echo date("d-m-Y",strtotime($contrato->fecha_contrato)) ?></td>
+
+								</tr>
+								<tr>
+									<td><strong>Descripción</strong></td>
+									<td colspan="5"><?php echo $contrato->descripcion ?></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<?php echo $this->flashSession->output(); ?>
+							<div id="divMsjeExito" class="msjs-alert" hidden="hidden">
+								<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+								<h5>
+									<i class="fa fa-check-circle"></i>
+									<!-- &Eacute;xito! -->
+									<a class="alert-link" href="javascript:void(0)" id="aMsjeExito"></a>
+								</h5>
+								
+							</div>
+						</div>
+					</div>
+					 
+					<?php foreach ($contratoproducto as $v) { ?>
+					<div class="row" style="color:#2D78D5;">
+						<hr>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label class="col-md-3 control-label"><strong>Produto: </strong></label>
+								<div class="col-md-9"><?php echo $v->producto ?></div>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label class="col-md-8 control-label"><strong>Precio Bs / Tiempo: </strong></label>
+								<div class="col-md-4"><?php echo $v->precio_unitario ?></div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label class="col-md-3 control-label"><strong>Rango Fecha: </strong></label>
+								<div class="col-md-9">De : <?php echo $v->fecha_inicio ?> Hasta: <?php echo $v->fecha_fin ?></div>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label class="col-md-6 control-label"><strong>Monto Bs.: </strong></label>
+								<div class="col-md-6"><?php echo $v->total ?></div>
+							</div>
+						</div>
+					</div>	
+					<?php $resul = Planpagos::find(array('baja_logica = 1 and contratoproducto_id = '.$v->id)); 
+					?>
+					<div class="row">
+						<div class="table-responsive">
+							<table class="table table-vcenter table-striped">
+								<thead>
+									<tr>
+										<th>Fecha Programado</th>
+										<th>Monto Programado</th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php foreach ($resul as $v) { ?>
+									<tr>
+										<td><?php echo $v->fecha_programado ?></td>
+										<td><?php echo $v->monto_programado ?></td>
+									</tr>
+								<?php } ?>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<?php  } ?>
+					
+					
+					
+				</div>
+				<br>
+
+			</div>
+		</div>
+	</div>
+</div>

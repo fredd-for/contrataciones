@@ -1,0 +1,92 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li class="active">Informes</li>
+			</ul>
+			<div class="panel-heading">
+				<h4>Listado de Informes</h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<?php echo $this->flashSession->output(); ?>
+							<div id="divMsjeExito" class="msjs-alert" hidden="hidden">
+								<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+								<h5>
+									<i class="fa fa-check-circle"></i>
+									<a class="alert-link" href="javascript:void(0)" id="aMsjeExito"></a>
+								</h5>
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+								<button class="btn btn-sm btn-primary" type="button" id="add"><i class="fa fa-plus fa-fw"></i>Adicionar</button>
+								<button class="btn btn-sm btn-warning" type="button" id="edit"><i class="fa fa-pencil fa-fw"></i> Editar</button>
+								<button class="btn btn-sm btn-danger" type="button" id="delete"><i class="fa fa-trash-o fa-fw"></i> Eliminar</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 550px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Modal Crear Contrato -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm" data-toggle="validator" action="" method="post" />
+			<input type="hidden" name="id" id="id">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-4 control-label">Solicitudes Aprobadas</label>
+					<div class="col-md-8" id="selectsolicitudes">
+						
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Hoja de Ruta</label>
+					<?php // if ($this->setConnectionService('sigec')) { ?>
+					<div class="col-md-4 " id="buscador">
+						<input type="search" name="nur" id="nur" class="form-control" placeholder="Search" />
+					</div>
+					<div class="col-md-4 " id="busqueda">
+
+					</div>	
+					<?php // } ?>
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->

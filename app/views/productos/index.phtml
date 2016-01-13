@@ -1,0 +1,141 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li class="active">Productos</li>
+			</ul>
+			<div class="panel-heading">
+				<h4>Listado de Productos</h4>
+				<div class="options">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+                        <li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+                    </ul>
+                </div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<?php  echo $this->flashSession->output(); ?>
+							<div id="divMsjeExito" class="msjs-alert" hidden="hidden">
+								<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+								<h5>
+									<i class="fa fa-check-circle"></i>
+									<!-- &Eacute;xito! -->
+									<a class="alert-link" href="javascript:void(0)" id="aMsjeExito"></a>
+								</h5>
+								
+							</div>
+						</div>
+					</div>
+					<?php if ($user->nivel==2 || $user->nivel==1) { ?>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+                                <button class="btn btn-sm btn-primary" type="button" id="add"><i class="fa fa-plus fa-fw"></i>Adicionar</button>	
+
+                                <button class="btn btn-sm btn-default" type="button" id="galeria"><i class="fa fa-plus fa-fw"></i>Galeria de Imagenes</button>
+                                
+                				<button class="btn btn-sm btn-warning" type="button" id="edit"><i class="fa fa-pencil fa-fw"></i> Editar</button>
+                				<button class="btn btn-sm btn-danger" type="button" id="delete"><i class="fa fa-trash-o fa-fw"></i> Eliminar</button>
+							</div>
+							<!-- <div class="pull-right">
+								<a href="/productos/reporte" class="btn btn-sm btn-primary"><i class="fa fa-download"></i> Reporte</a>
+							</div> -->
+						</div>
+					</div>
+					<?php } ?>
+					<input id="opcion" name="opcion" type="hidden" value="<?php echo $opcion ?>"/>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 600px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm" data-toggle="validator"/>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<input id="id" name="id" type="hidden" />
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">Linea:</label>
+					<div class="col-md-9">
+						<?php echo $linea ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Estación:</label>
+					<div class="col-md-9">
+						<select id="estacion_id" name="estacion_id" class="form-control">
+							
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Grupo:</label>
+					<div class="col-md-9">
+						<?php echo $grupo ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Producto:</label>
+					<div class="col-md-9">
+						<input type="text" name="producto" id="producto" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Codigo</label>
+					<div class="col-md-9">
+						<input type="text" name="codigo" id="codigo" class="form-control">
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Descripción</label>
+					<div class="col-md-9">
+						<textarea name="descripcion" id="descripcion" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Cantidad</label>
+					<div class="col-md-9">
+						<input type="number" name="cantidad" id="cantidad" value="1" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Tiempo</label>
+					<div class="col-md-9">
+						<?php echo $tiempo ?>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Precio Bs. <span id='tiempo_text'></span></label>
+					<div class="col-md-9">
+						<input type="number" name="precio_unitario" id="precio_unitario" class="form-control" required title="campo obligatorio">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->

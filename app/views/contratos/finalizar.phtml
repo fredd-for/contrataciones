@@ -1,0 +1,135 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-8">
+						<h3><?php echo $contrato->razon_social ?>&nbsp; <b>Contrato Nro:</b> <?php echo $contrato->contrato ?>  </h3>		
+					</div>	
+					<div class="col-md-4">
+					<?php if ($contrato->estado == 1) { ?>
+							<button class="btn btn-sm btn-primary pull-right" type="button" id="finalizar_contrato" contrato_id="<?php echo $contrato->id ?>" nro_contrato="<?php echo $contrato->contrato ?>"><i class="fa fa-plus fa-fw"></i>Finalizar Contrato</button>
+						<?php } elseif ($contrato->estado ==2) { ?>
+							<span class="label label-success pull-right"><?php echo $contrato->valor_1 ?></span>
+						<?php } else{ ?>
+							<span class="label label-danger pull-right"><?php echo $contrato->valor_1 ?></span>
+						<?php }?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+					<?php echo $this->flashSession->output() ?>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-primary">
+			<?php 
+			$cp_ids='';
+			foreach ($productos as $v) { 
+				$cp_ids.=$v->id.',';
+			?>
+				<div class="panel-body">
+					
+						<div class="row">
+						<div class="col-md-12">
+						<?php if ($v->estado == 1) { ?>
+							<?php if ($nroproductosactivos>1) { ?>
+							<a href="javascript:void(0)" contratoproducto_id="<?php echo $v->id ?>" producto="<?php echo $v->codigo.' -- '.$v->producto ?>" class="btn btn-sm btn-success pull-left productos">Finalizar Producto</a>
+							<?php }?>
+						<?php } elseif ($v->estado ==2) { ?>
+							<span class="label label-success"><?php echo $v->valor_1 ?></span>
+						<?php } else{ ?>
+							<span class="label label-danger"><?php echo $v->valor_1 ?></span>
+						<?php }?>
+							
+						</div>
+					</div>	
+					
+					
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="row">
+								<div class="col-md-5">
+									<b>Grupo:</b> <?php echo $v->grupo ?>
+								</div>
+								<div class="col-md-7">
+									<b>Estación:</b> <?php echo $v->estacion ?>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="row">
+								<div class="col-md-2">
+									<b>Codigo:</b> <?php echo $v->codigo ?>
+								</div>
+								<div class="col-md-4">
+									<b>Producto:</b> <?php echo $v->producto ?>
+								</div>
+								<div class="col-md-3">
+									<b>Fecha Inicio:</b> <?php echo date("d-m-Y",strtotime($v->fecha_inicio)) ?>
+								</div>
+								<div class="col-md-3">
+									<b>Fecha Finalizacion:</b> <?php echo date("d-m-Y",strtotime($v->fecha_fin)) ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div id="jqxgrid_garantia<?php echo $v->id?>" style="width: 100%;" ></div>
+						</div>
+						<div class="col-sm-6">
+							<div id="jqxgrid_devolucion<?php echo $v->id?>" style="width: 100%;" ></div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid<?php echo $v->id?>" style="width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			<?php } ?>
+			</div>	
+			
+			<input type="hidden" name="cp_ids" id="cp_ids" value="<?php echo $cp_ids ?>">
+			
+		</div>
+	</div>
+</div>
+
+<!-- Modal  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm" data-toggle="validator" action="/contratos/savefinalizar/" method="post" />
+			<input type="hidden" name="contrato_id" id="contrato_id" value="<?php echo $contrato->id ?>">	
+			<input type="hidden" name="contratoproducto_id" id="contratoproducto_id" value="">	
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Motivo</label>
+					<div class="col-md-9">
+						<?php echo $estado ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Observación</label>
+					<div class="col-md-9">
+						<textarea name="observacion" id="observacion" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->

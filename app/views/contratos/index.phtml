@@ -1,0 +1,200 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li class="active">Contratos</li>
+			</ul>
+			<div class="panel-heading">
+				<h4>Lista de Contratos</h4>
+				<div class="options">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+                        <li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+                    </ul>
+                </div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+						<div class="pull-left">
+								<?php if ($user->nivel==2 || $user->nivel==1) { ?>
+								<button class="btn btn-sm btn-primary" type="button" id="crear_contrato"><i class="fa fa-plus fa-fw"></i>Crear Contrato</button>	
+								<button class="btn btn-sm btn-warning" type="button" id="edit_contrato"><i class="fa fa-pencil fa-fw"></i> Editar</button>
+								<button class="btn btn-sm btn-danger" type="button" id="delete_contrato"><i class="fa fa-trash-o fa-fw"></i> Eliminar</button>
+								<?php } ?>
+								<button class="btn btn-sm btn-default" type="button" id="ver_productos"><i class="fa fa-pencil fa-fw"></i> Agregar Productos</button>
+								<button class="btn btn-sm btn-default" type="button" id="ver_checklist"><i class="fa fa-pencil fa-fw"></i> Actualizar Check List</button>
+							</div>
+							
+							<div class="pull-right">
+								<button class="btn btn-sm btn-primary" type="button" id="finalizar_contrato"><i class="fa fa-archive fa-fw"></i>Finalizar Contrato</button>	
+							</div>
+						</div>
+					</div>
+					<input type="hidden" name="opcion" id="opcion" value="<?php echo $opcion ?>">
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 500px; width: 100%;" ></div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<b>Productos Alquilados : </b>
+							<span id="productos_alquilados"> </span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid_productos" style="height: 200px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Crear Contrato -->
+<div class="modal fade" id="myModal_contrato" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm_contrato" data-toggle="validator" action="" method="post" />
+			<!-- <input type="hidden" name="cliente_id" id="cliente_id"> -->
+			<input type="hidden" name="contrato_id" id="contrato_id">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo_contrato">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="col-md-12 center-block">
+					<strong><?php echo $empresa->empresa ?></strong>
+						<input type="hidden" name="arrendador" id="arrendador" value="<?php echo $empresa->empresa ?>" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Representante Legal</label>
+					<div class="col-md-8">
+						<?php echo $empresa->representante_legal.' <br> <span>'.$empresa->cargo.'</span>';  ?>
+						<input type="hidden" name="arrendador_rep_legal" id="arrendador_rep_legal" value="<?php echo $empresa->representante_legal ?>" class="form-control" placeholder="" required readonly>
+						<input type="hidden" name="arrendador_cargo" id="arrendador_cargo" value="<?php echo $empresa->cargo ?>" class="form-control" placeholder="" required readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Responsable Comercial</label>
+					<div class="col-md-8">
+						<?php echo $responsable ?>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<div class="col-md-12">
+						<strong>CLIENTE / EMPRESA</strong>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Razón Social</label>
+					<div class="col-md-8">
+						<?php echo $clientes; ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">NIT.</label>
+					<div class="col-md-8">
+						<input type="text" name="nit" id="nit" class="form-control" placeholder="" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Representante Legal</label>
+					<div class="col-md-8">
+						<input type="text" name="rl" id="rl" class="form-control" placeholder="" readonly>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Nro Solicitud</label>
+					<div class="col-md-8">
+						<select name="solicitud_id" id="solicitud_id" class="form-control">
+							<option value="">(Seleccionar)</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Nro Contrato</label>
+					<div class="col-md-2">
+						<input type="text" name="contrato" id="contrato" class="form-control" placeholder="000/2015" required>
+					</div>
+
+					<label class="col-md-3 control-label">Fecha Contrato</label>
+					<div class="col-md-3">
+						<input type="text" id="fecha_contrato" name="fecha_contrato" class="form-control" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" required/>
+					</div>
+
+				</div>
+				<div class="form-group" >
+					<label class="col-md-4 control-label">Descripción</label>
+					<div class="col-md-8">
+						<textarea name="descripcion" id="descripcion" class="form-control"></textarea>
+					</div>
+				</div>
+				<hr>
+				<strong>Parametros de Cobro</strong>
+				<div class="form-group" >
+					<div class="col-md-4">
+						<div class="radio">
+							<label>
+								<input type="radio" value="1" id="tipo_pago_1" name="tipo_pago" checked="checked">Plan Pagos Mensual
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" value="2" id="tipo_pago_2" name="tipo_pago" >Plan Pagos Mes Cumplido
+							</label>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="radio">
+							<label>
+								<input type="radio" value="1" id="tipo_cobro_mora_1" name="tipo_cobro_mora" checked="checked">Cobro de mora según fecha programada
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" value="2" id="tipo_cobro_mora_2" name="tipo_cobro_mora">Cobro de mora según fecha de factura
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" value="3" id="tipo_cobro_mora_3" name="tipo_cobro_mora">Cobro de mora según fecha recepción de factura
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-4 control-label">Tolerancia (dias)</label>
+					<div class="col-md-2">
+						<input type="text" name="dias_tolerancia" id="dias_tolerancia" class="form-control" placeholder="" required value="5">
+					</div>
+					<label class="col-md-4 control-label">Interes por Mora (%)</label>
+					<div class="col-md-2">
+						<input type="text" name="porcentaje_mora" id="porcentaje_mora" class="form-control" placeholder="" required value="3">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+<style type="text/css">
+	.datepicker{
+		z-index:1151 !important;
+	}
+</style>

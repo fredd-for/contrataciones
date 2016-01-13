@@ -1,0 +1,164 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li><a href="/contratos/">Contratos</a></li>
+				<li class="active">Actualizar Check List</li>
+			</ul>
+			<div class="panel-heading">
+				<h4> CHECK LIST / Contrato Nro: <?php echo $contrato_nro ?> / <?php echo $descripcion ?></h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<?php echo $this->flashSession->output(); ?>
+							<div id="divMsjeExito" class="msjs-alert" hidden="hidden">
+								<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+								<h5>
+									<i class="fa fa-check-circle"></i>
+									<a class="alert-link" href="javascript:void(0)" id="aMsjeExito"></a>
+								</h5>
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+								<button class="btn btn-sm btn-primary" type="button" id="migrar"><i class="fa fa-subway"></i>Migrar Ultimo Contrato</button>
+								<button class="btn btn-sm btn-warning" type="button" id="edit"><i class="fa fa-pencil fa-fw"></i> Editar Archivos</button>
+								<!-- <button class="btn btn-sm btn-danger" type="button" id="delete"><i class="fa fa-trash-o fa-fw"></i> Eliminar</button> -->
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 550px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal eliminar archivos -->
+<div class="modal fade" id="myModal_deletearchivo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm_deletearchivo" data-toggle="validator" action="" method="post" />
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo_deletearchivo">Parametro</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div id="li_da">
+
+							</div>
+						</div>                          	
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<!-- Modal Adicinar archivo -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		
+			<form method="post" action="/checklists/savearchivo/" class="form-horizontal" id="testForm" enctype="multipart/form-data">
+			<input type="hidden" name="parametro_id" id="parametro_id" value="">
+			<input type="hidden" name="contrato_id" id="contrato_id" value="<?php echo $contrato_id ?>">
+			<input type="hidden" name="cliente_id" id="cliente_id" value="<?php echo $cliente_id ?>">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Documento Digital</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="col-md-12">
+						<input id="file-1" name="file-1" type="file" data-overwrite-initial="false" data-min-file-count="1">
+					</div>
+				</div>
+			</div>
+			<!-- <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div> -->
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<!-- Modal MIgrar -->
+<div class="modal fade" id="myModal_migrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm_migrar" data-toggle="validator" action="" method="post" />
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Migrar Check List del siguiente contrato</h4>
+			</div>
+			<div class="modal-body">
+			<?php if (count($listcontratos)>0) { ?>
+			<?php foreach ($listcontratos as $v) { ?>
+				<div class="table-responsive">
+					<table class="table table-vcenter table-striped">
+						<thead>
+							<tr>
+								
+								<th>Contrato</th>
+								<th>Descripción</th>
+								<th>Fecha Contrato</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								
+								<td><?php echo $v->contrato ?></td>
+								<td><?php echo $v->descripcion ?></td>
+								<td><?php echo $v->fecha_contrato ?></td>
+								<td>
+									<input type="radio" name="contrato_id_migrar" value="<?php echo $v->id ?>" required/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			<?php } ?>
+				
+			<?php }	else {
+				echo "Es el primer contrato para llenar check list. ";
+				}?>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<?php if (count($listcontratos)>0) { ?>
+				<button type="submit" class="btn btn-primary" id="Save">Migrar</button>
+				<?php } ?>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+

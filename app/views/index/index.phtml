@@ -1,0 +1,187 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h4>Página de Inicio</h4>
+                <div class="options">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-dashboard"></i></a></li>
+                        <li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="panel-body">        
+                <div class="tab-content">
+                    <div id="domshortcuttiles" class="tab-pane active">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a class="shortcut-tiles tiles-info animated fadeInDownBig" href="/clientes">
+                                    <div class="tiles-body">
+                                        <div class="pull-left"><i class="fa fa-users"></i></div>
+                                        <div class="pull-right"><span class="badge animated rubberBand">Clientes : <?php echo $clientes ?></span></div>
+                                    </div>
+                                    <div class="tiles-footer">
+                                        Clientes con Contrato Activos
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                    <a class="shortcut-tiles tiles-danger animated fadeInLeftBig" href="/productos/index/0">
+                                    <div class="tiles-body">
+                                        <div class="pull-left"><i class="fa fa-gears"></i></div>
+                                        <div class="pull-right"><span class="badge animated rubberBand">Productos: <?php echo $productossinalquilar ?></span></div>
+                                    </div>
+                                    <div class="tiles-footer">
+                                        Productos para Alquilar
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="shortcut-tiles tiles-indigo animated fadeInDownBig" href="/productos/index/1">
+                                    <div class="tiles-body">
+                                        <div class="pull-left"><i class="fa fa-gears"></i></div>
+                                        <div class="pull-right"><span class="badge animated animated fadeInDownBig">Productos: <?php echo $productosalquilados ?></span></div>
+                                    </div>
+                                    <div class="tiles-footer">
+                                        Productos Alquilados
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-3">
+                                <a class="shortcut-tiles tiles-magenta animated fadeInRightBig" href="/contratos/index/1">
+                                    <div class="tiles-body">
+                                        <div class="pull-left"><i class="fa fa-file-text"></i></div>
+                                        <div class="pull-right"><span class="badge animated rubberBand">Contratos: <?php echo $contratosActivos?></span></div>
+                                    </div>
+                                    <div class="tiles-footer">
+                                        Contratos Activos
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- <div class="col-md-2">
+                                    <a class="shortcut-tiles tiles-orange animated fadeInLeftBig" href="#">
+                                    <div class="tiles-body">
+                                        <div class="pull-left"><i class="fa fa-usd"></i></div>
+                                        <div class="pull-right"><span class="badge animated ">Ganancia</span></div>
+                                    </div>
+                                    <div class="tiles-footer">
+                                        Ganancia Acumulada
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="shortcut-tiles tiles-danger animated fadeInDownBig" href="/personas">
+                                    <div class="tiles-body">
+                                        <div class="pull-left"><i class="fa fa-usd"></i></div>
+                                        <div class="pull-right"><span class="badge animated fadeInUpBig">Mora: </span></div>
+                                    </div>
+                                    <div class="tiles-footer">
+                                        Numero de Contratos en Mora
+                                    </div>
+                                </a>
+                            </div> -->
+                        </div>
+
+                    </div>
+                    <div id="codeshortcuttiles" class="tab-pane">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+ <div id="modal-large" class="modal" tabindex="-1" role="dialog" aria-hidden="true"   >
+        <div class="modal-dialog modal-lg">
+        <table id="datatable">     
+        <?php echo $html_tabla; ?>
+        </table>       
+        </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="widget">
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <!-- <div class="col-sm-6">
+          <div class="widget">
+            <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>      
+    </div> -->
+</div>
+<div class="row">
+    <div class="col-sm-6 ">
+        <div id="container3" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+
+    </div>
+    <div class="col-sm-6 ">
+        <div id="container5" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="widget" style="overflow-x: auto; ">
+            <div id="chart" class="orgChart"></div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-12 ">
+        <div class="widget">
+            <div style="width: 100%;" id="lista_personal" ></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="modal-large" class="modal" tabindex="-1" role="dialog" aria-hidden="true"   >
+        <div class="modal-dialog modal-lg">
+            <form action="" method="post" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title"></h3>
+                    </div>
+                    <div class="modal-body">                       
+                            <iframe src="" style="zoom:0.80" id="iframe1" frameborder="0" height="600px" width="850px">
+        
+                            </iframe>                                                                              
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Crear Contrato -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" id="testForm" data-toggle="validator" action="" method="post" />
+            <input type="hidden" name="id" id="id">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titulo"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="container4" style="min-width: 550px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+
+               
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- end  modal -->
+

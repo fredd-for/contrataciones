@@ -1,0 +1,251 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<div class="panel-heading">
+				<h4>Seguimiento Hoja de Ruta</h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="block">
+								<div class="block-title">
+									<i class="fa fa-tags"></i>
+									<h2><strong>Hoja de Ruta :</strong><?php echo $documento->nur ?></h2>
+								</div>
+								<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Referencia: </span>
+									</div>
+									<div class="col-lg-10 col-md-10">
+										<span class="text-medium text-primary-dark"><?php echo utf8_encode($documento->referencia) ?></span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Documento Original: </span>
+									</div>
+									<div class="col-lg-5 col-md-5">
+										<span class="text-medium">
+											<a href="javascript:void(0);"><?php echo utf8_encode($documento->cite_original) ?></a>
+										</span>
+									</div>
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Proceso: </span>
+									</div>
+									<div class="col-lg-3 col-md-3"> <?php echo $documento->proceso ?> </div>
+								</div>
+								<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Destinatario: </span>
+									</div>
+									<div class="col-lg-5 col-md-5">
+										<span class="text-medium"><?php echo utf8_encode($documento->nombre_destinatario) ?> / <?php echo utf8_encode($documento->cargo_destinatario) ?></span>
+									</div>
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Tipo Documento: </span>
+									</div>
+									<div class="col-lg-3 col-md-3">
+										<span><?php echo utf8_encode($documento->tipo) ?></span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Remitente: </span>
+									</div>
+									<div class="col-lg-5 col-md-5">
+										<span class="text-medium"><?php echo utf8_encode($documento->nombre_remitente) ?> / <?php echo utf8_encode($documento->cargo_remitente) ?></span>
+									</div>
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Fecha: </span>
+									</div>
+									<div class="col-lg-3 col-md-3">
+										<span class=" opacity-50"> <?php echo $documento->fecha_creacion ?> </span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-2 col-md-2">
+										<span class=" opacity-50">Archivos adjuntos: </span>
+									</div>
+									<div class="col-lg-10 col-md-10">
+										<span class="text-medium"> </span>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="block full">
+								<div class="block-title">
+									<div class="block-options pull-right">
+										<a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+									</div>
+									<h2><strong>Seguimiento</strong> del proceso</h2>
+								</div>
+								<div class="timeline block-content-full">
+									<ul class="timeline-list timeline-hover">
+									<?php foreach ($seguimiento as $v) { 
+										
+										$activar = '';
+										if ($v->estado == 2 || $v->estado == 10) {
+											$activar= 'active';	
+										}
+										?>
+										<li class="<?php echo $activar ?>">
+											<div class="timeline-icon"><i class="fa fa-leaf"></i></div>
+											<div class="timeline-content">
+												<div class="row push">
+													<div class="col-lg-5 col-md-5">
+														<span class="text-warning text-xl stick-top-right">
+															<i class="fa fa-paw"></i>
+														</span>
+														<span class="text-medium">
+															<p>
+																<span class="text-medium">
+																	<a href="javascript:void(0)"><?php echo utf8_encode($v->de_oficina)  ?></a>
+																	<br>
+																	<a class="text-primary-dark" href="javascript:void(0);"><?php echo  utf8_encode($v->nombre_emisor) ?></a>
+																</span>
+																<br>
+																<span class="opacity-75"> <?php echo utf8_encode($v->cargo_emisor) ?> </span>
+															</p>
+															<span class="opacity-50 pull-right text-light">
+																<i class="fa fa-arrow-up"></i>
+																<?php echo $v->fecha_emision ?>
+															</span>
+														</span>
+													</div>
+													<div class="col-lg-5 col-md-5">
+														<span class="text-warning text-xl stick-top-right">
+															<i id="" class="fa fa-paw"></i>
+														</span>
+														<span class="text-medium">
+															<p>
+																<span class="text-medium">
+																	<a href="javascrip:void(0);"><?php echo utf8_encode($v->a_oficina) ?></a>
+																	<br>
+																	<a class="text-primary-dark" href="javascript:void(0)"><?php echo utf8_encode($v->nombre_receptor) ?></a>
+																</span>
+																<br>
+																<span class="opacity-75"> <?php echo utf8_encode($v->cargo_receptor) ?> </span>
+															</p>
+															<span class="opacity-50 pull-right text-light">
+															<i class="fa fa-arrow-down"></i>
+															<?php echo $v->fecha_recepcion ?> </span>
+														</span>
+													</div>
+													<div class="col-lg-2 col-md-2">
+														<span class=" badge style-info text-medium"> <?php echo $v->estados ?> </span>
+														<?php 
+														$model = new Seguimientos();
+        												$resul = $model->adjuntos($v->id);
+														 ?>
+														<span class=" text-xs">
+															<br>
+															Adjunto:
+															<?php foreach ($resul as $p) { ?>
+																<p><?php echo utf8_encode($p->cite_original) ?></p>	
+															<?php } ?>
+														</span>
+													</div>
+												</div>
+												<div class="row">
+														<div class="col-lg-11 col-md-11">
+															<span class=" text-medium opacity-75 text-light">
+																<i class="fa fa-comment-o"></i>
+																<?php echo utf8_encode($v->proveido) ?>
+															</span>
+														</div>
+														<div class="col-lg-1 col-md-1">
+															<div class="row">
+																<div class="col-xs-5">
+																<button class="btn btn-alt btn-sm btn-warning" type="button" title="Nro Dias Estado No Recebido"> <?php echo $v->dias_recepcion ?></button>
+															</div>
+															<div class="col-xs-2">
+																
+															</div>
+															<div class="col-xs-5">
+																<button class="btn btn-alt btn-sm btn-danger" type="button" title="Nro Dias Estado Pendiente"><?php echo $v->dias_pendiente ?></button>
+															</div>		
+															</div>
+															
+														</div>
+												</div>
+
+											</div>
+										</li>
+									<?php } ?>
+										
+										
+										<!-- <li class="active">
+											<div class="timeline-icon"><i class="fa fa-leaf"></i></div>
+											<div class="timeline-content">
+												<div class="row push">
+													<div class="col-lg-5 col-md-5">
+														<span class="text-warning text-xl stick-top-right">
+															<i class="fa fa-paw"></i>
+														</span>
+														<span class="text-medium">
+															<p>
+																<span class="text-medium">
+																	<a href="/route/oficina/77">UNIDAD ADMINISTRATIVA</a>
+																	<br>
+																	<a class="text-primary-dark" href="/users/profile/">Ventanilla Unica</a>
+																</span>
+																<br>
+																<span class="opacity-75"> Encargado de Ventanilla Unica </span>
+															</p>
+															<span class="opacity-50 pull-right text-light">
+																<i class="fa fa-arrow-up"></i>
+																Lunes, 10/Jun/2013 - 18:20:43
+															</span>
+														</span>
+													</div>
+													<div class="col-lg-5 col-md-5">
+														<span class="text-warning text-xl stick-top-right">
+															<i id="" class="fa fa-paw"></i>
+														</span>
+														<span class="text-medium">
+															<p>
+																<span class="text-medium">
+																	<a href="/route/oficina/110">UNIDAD DE TRANSPORTE POR CABLE</a>
+																	<br>
+																	<a class="text-primary-dark" href="/users/profile/">Cesar Dockweiler Suárez</a>
+																</span>
+																<br>
+																<span class="opacity-75"> Coordinador General de la UTC </span>
+															</p>
+															<span class="opacity-50 pull-right text-light">Enviado: Lunes, 10/Jun/2013 - 19:16:02 </span>
+														</span>
+													</div>
+													<div class="col-lg-2 col-md-2">
+														<span class=" badge style-info text-medium"> Recibido/Derivado </span>
+														<span class=" text-xs">
+															<br>
+															Adjunto:
+															<br>
+														</span>
+													</div>
+												</div>
+												
+
+											</div>
+										</li> -->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

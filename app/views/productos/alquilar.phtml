@@ -1,0 +1,58 @@
+<style type="text/css">
+.text_encima {
+	position: absolute;
+	color: #7715D1;
+	font-size: 30px;
+	font-family: arial;
+}
+</style>
+<div class="row">
+	<div class="widget">
+		<div class="widget-advanced widget-advanced-alt">
+			<div class="widget-header text-left">
+				<h3 class="widget-content widget-content-image widget-content-light clearfix">
+					<a href="javascript:void(0)" class="widget-icon pull-right">
+						<i class="fa fa-picture-o"></i>
+					</a>
+					<a href="javascript:void(0)" class="themed-color-default">Productos</strong></a><br />
+					<small>Lista de productos</small>
+				</h3>
+			</div>
+			<?php  echo $this->flashSession->output(); ?>
+			<div class="col-lg-12">
+				<div class="widget-main">
+					<div class="gallery gallery-widget" data-toggle="lightbox-gallery">
+						<div class="row">
+							<?php foreach ($producto as $v) {
+								$file = "/file/productos/images.png";
+								if (file_exists($v->carpeta.$v->nombre_archivo)) { 
+									$file = '/'.$v->carpeta.$v->nombre_archivo;
+								}	
+								?>
+								<div class="col-xs-4 col-sm-2">
+									<div style="cursor: n-resize;">
+										<a href="<?php echo $file ?>" class="gallery-link" title="Producto">
+											<img src="<?php echo $file ?>" alt="imagen" />
+										</a>
+									</div>
+								</div>
+								<?php } ?>
+
+								<div class="col-xs-4 col-sm-2">
+									<div>
+									<span class="text_encima">Texto Texto Texto para todos</span>
+										<img src="<?php echo $file ?>" alt="imagen" />
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+</div>
+
+<!-- <div>
+<span class="text_encima">Texto texto texto</span><img src="/file/productos/images.png">
+</div>
+ -->

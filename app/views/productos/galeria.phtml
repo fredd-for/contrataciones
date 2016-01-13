@@ -1,0 +1,109 @@
+<!-- <div class="row">
+	<form method="post" action="" class="form-horizontal" id="testForm" enctype="multipart/form-data">
+		<div class="form-group">
+			<label class="col-lg-4 control-label">Adicinar Imagen</label>
+			<div class="col-lg-8">
+				<input type="file" name="archivo" id="archivo" class="file" >
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-lg-12" align="center">
+					<button type="submit" class="btn btn-primary" id="guardar">Guardar</button>
+					<a href="../" class="btn btn-primary">Cancelar</a>
+				</div>
+			</div>
+		</div>
+	</form>
+</div> -->
+
+<!-- <div class="row">
+	<div class="page-header">
+		<h1>Bootstrap File Input Example</h1>
+	</div>
+	<form enctype="multipart/form-data">
+		<input id="file-0a" class="file" type="file" multiple data-min-file-count="1">
+		<br>
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="reset" class="btn btn-default">Reset</button>
+	</form>
+</div> -->
+
+
+
+
+<div class="row">
+	<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li><a href="/productos/">Productos</a></li>
+				<li class="active">Galeria de Imagén</li>
+			</ul>
+	<div class="widget">
+		<div class="widget-advanced widget-advanced-alt">
+			<div class="widget-header text-left">
+				<h3 class="widget-content widget-content-image widget-content-light clearfix">
+					<a href="javascript:void(0)" class="widget-icon pull-right">
+						<i class="fa fa-picture-o"></i>
+					</a>
+					<a href="javascript:void(0)" class="themed-color-default"><?php echo $producto->codigo ?><strong> - <?php echo $producto->producto ?></strong></a><br />
+					<small><?php echo $producto->descripcion ?></small>
+				</h3>
+			</div>
+			<?php  echo $this->flashSession->output(); ?>
+			<div class="col-lg-8">
+				<div class="widget-main">
+					<div class="gallery gallery-widget" data-toggle="lightbox-gallery">
+						<div class="row">
+							<?php foreach ($archivo as $v) {
+								if (file_exists($v->carpeta.$v->nombre_archivo)) { ?>
+								<div class="col-xs-6 col-sm-3">
+									<div style="cursor: n-resize;">
+										<?php if ($v->estado ==1) { ?>
+										<a title="Imagen Inicial" href="javascript:void(0)">
+											<i class="fa fa-check fa-lg text-success"></i>
+										</a>	
+										<?php } ?>
+										<a title="Activar como imagen inicial" href="/productos/imagenactivar/<?php echo $v->id ?>">
+											<i class="fa fa-check fa-lg text-warning"></i>
+										</a>
+										<a title="eliminar imagen" href="/productos/imagendelete/<?php echo $v->id ?>">
+											<i class="fa fa-minus-circle fa-lg text-danger"></i>
+										</a>
+										<br>
+										<a href="/<?php echo $v->carpeta.$v->nombre_archivo ?>" class="gallery-link" title="Producto">
+											<img src="/<?php echo $v->carpeta.$v->nombre_archivo ?>" alt="imagen" />
+										</a>
+									</div>
+									
+
+								</div>			
+								<?php }
+							} ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+
+				<form method="post" action="" class="form-horizontal" id="testForm" enctype="multipart/form-data">
+
+ <!-- <div class="form-group">
+			<label class="col-lg-2 control-label">Adicinar Imagen</label>
+			<div class="col-lg-4">
+				<input id="archivo" type="file" name="archivo" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
+			</div>
+		</div> -->
+
+		<div class="form-group pull-right">
+			<label>Agregar Imagenes</label>
+			<input id="file-1" name="file-1[]" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="1">
+			<!-- <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-preview-file-icon=""> -->
+		</div>
+
+	</form>
+
+</div>
+</div>			
+</div>
+</div>
+

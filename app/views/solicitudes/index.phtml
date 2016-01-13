@@ -1,0 +1,247 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li class="active">Solicitudes</li>
+			</ul>
+			<div class="panel-heading">
+				<h4>Lista de Solicitudes</h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+								<button class="btn btn-sm btn-default" type="button" id="ver_productos"><i class="fa fa-pencil fa-fw"></i>  Productos</button>
+								<?php if ($user->nivel==2 || $user->nivel==1) { ?>
+								<button class="btn btn-sm btn-primary" type="button" id="add"><i class="fa fa-plus fa-fw"></i>Crear Solicitud</button>	
+								<button class="btn btn-sm btn-warning" type="button" id="edit"><i class="fa fa-pencil fa-fw"></i> Editar</button>
+								<button class="btn btn-sm btn-danger" type="button" id="delete"><i class="fa fa-trash-o fa-fw"></i> Eliminar</button>
+								<?php } ?>
+							</div>
+							
+							<div class="pull-right">
+								<a href="/solicitudes/reporte" class="btn btn-sm btn-primary"><i class="fa fa-download"></i> Reporte</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 500px; width: 100%;" ></div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<b>Productos Solicitados : </b>
+							<span id="productos_solicitados"> </span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid_productos" style="height: 200px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Crear Contrato -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm" data-toggle="validator" action="" method="post" />
+			<input type="hidden" name="id" id="id">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-4 control-label">Responsable Comercial</label>
+					<div class="col-md-8">
+						<?php echo $responsable ?>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<div class="col-md-12">
+						<h5 align="center">CLIENTE / EMPRESA</h5>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Razón Social</label>
+					<div class="col-md-8">
+						<?php echo $clientes; ?>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Nro Solicitud</label>
+					<div class="col-md-8">
+						<input type="text" name="nro_solicitud" id="nro_solicitud" class="form-control" placeholder="000/2015" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Remitente</label>
+					<div class="col-md-8">
+						<input type="text" name="representante" id="representante" class="form-control" placeholder="" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Cargo Remitente</label>
+					<div class="col-md-8">
+						<input type="text" name="cargo_representante" id="cargo_representante" class="form-control" placeholder="" required>
+					</div>
+				</div>
+				
+				<div class="input-daterange" data-date-format="dd-mm-yyyy">
+					<div class="form-group" >
+						<label class="col-md-4 control-label">Fecha Envio</label>
+						<div class="col-md-8">
+							<input type="text" id="fecha_envio_solicitud" name="fecha_envio_solicitud" class="form-control input-datepicker-close" placeholder="dd-mm-yyyy" required/>
+						</div>
+					</div>
+					<div class="form-group" >
+						<label class="col-md-4 control-label">Fecha Recepción</label>
+						<div class="col-md-8">
+							<input type="text" id="fecha_recepcion_solicitud" name="fecha_recepcion_solicitud" class="form-control input-datepicker-close" placeholder="dd-mm-yyyy" required/>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-4 control-label">Descripción Solicitud</label>
+					<div class="col-md-8">
+						<textarea name="descripcion_solicitud" id="descripcion_solicitud" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<!-- Modal Crear Respuesta -->
+<div class="modal fade" id="myModal_respuesta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm_respuesta" data-toggle="validator" action="" method="post" />
+			<!-- <input type="hidden" name="id" id="id"> -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo_respuesta">Respuesta a la Solicitud</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-4 control-label">Cliente / Razon Social</label>
+					<div class="col-md-8">
+						<p class="form-control-static" id="razon_social_text"></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Nro Solicitud</label>
+					<div class="col-md-8">
+						<p class="form-control-static" id="nro_solicitud_text"></p>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Respuesta</label>
+					<div class="col-md-8">
+						<?php echo $estado ?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Descripción Respuesta</label>
+					<div class="col-md-8">
+						<textarea class="form-control" name="descripcio_resp" id="descripcio_resp"></textarea>
+					</div>
+				</div>
+				<div class="input-daterange" data-date-format="dd-mm-yyyy">
+					<div class="form-group" >
+						<label class="col-md-4 control-label">Fecha Envio Respuesta</label>
+						<div class="col-md-8">
+							<input type="text" id="fecha_envio_resp" name="fecha_envio_resp" class="form-control input-datepicker-close" placeholder="dd-mm-yyyy" required/>
+						</div>
+					</div>
+					<div class="form-group" >
+						<label class="col-md-4 control-label">Fecha Recepción Respuesta</label>
+						<div class="col-md-8">
+							<input type="text" id="fecha_recepcion_resp" name="fecha_recepcion_resp" class="form-control input-datepicker-close" placeholder="dd-mm-yyyy"/>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<!-- Modal Adjuntar Hoja de Ruta -->
+<div class="modal fade" id="myModal_informe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-bordered" id="testForm_informe" data-toggle="validator" action="" method="post" />
+			<input type="hidden" name="solicitud_id" id="solicitud_id">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo_informe">Adjuntar Informe Sistema de Gestión de Correspondencia</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Hoja de Ruta</label>
+					<input type="search" id="nur" name="nur" class="form-control" placeholder="Ingrese la hoja de ruta" />
+					<span class="help-block" id="busqueda"></span>
+				</div>
+
+				<!-- <div class="form-group">
+					<label class="col-md-4 control-label">Hoja de Ruta</label>
+					<div class="col-md-8" id="buscador">
+						<input type="search" name="nur" id="nur" class="form-control" placeholder="Search" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label"></label>
+					<div class="col-md-8" id="busqueda">
+					</div>
+					<span class="help-block" id="busqueda"></span>
+				</div> -->
+			</div>
+
+
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<style type="text/css">
+	.datepicker{
+		z-index:1151 !important;
+	}
+</style>

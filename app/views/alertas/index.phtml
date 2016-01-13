@@ -1,0 +1,125 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li class="active">Alertas</li>
+			</ul>
+			<div class="panel-heading">
+				<h4>Alerta Pagos Pendientes</h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div id="divMsjeExito" class="msjs-alert" hidden="hidden">
+								<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+								<h5>
+									<i class="fa fa-check-circle"></i>
+									<a class="alert-link" href="javascript:void(0)" id="aMsjeExito"></a>
+								</h5>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+								<button class="btn btn-sm btn-warning" type="button" id="enviar_correo"><i class="fa fa-pencil fa-fw"></i> Enviar Correo</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 500px; width: 100%;" ></div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<h4>Alerta Productos por Finalizar Contrato</h4>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-left">
+								<button class="btn btn-sm btn-warning" type="button" id="enviar_correo2"><i class="fa fa-pencil fa-fw"></i> Enviar Correo</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid_contratos" style="height: 500px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Envio Correo -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm" data-toggle="validator" action="" method="post" />
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Envio de Correo</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Para:</label>
+					<div class="col-md-9" >
+						<p class="form-control-static" id="text_destinatario"></p>
+					</div>
+					<input type="hidden" name="destinatario_correo" id="destinatario_correo">
+					<input type="hidden" name="destinatario" id="destinatario">
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Con Copia:</label>
+					<div class="col-md-9">
+						<p class="form-control-static" id="text_concopia"></p>
+					</div>
+					<input type="hidden" name="concopia_correo" id="concopia_correo">
+					<input type="hidden" name="concopia" id="concopia">
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Asunto</label>
+					<div class="col-md-9">
+						<input type="text" name="asunto" id="asunto" class="form-control" placeholder="" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<textarea>
+							<h3>TinyMCE 4.1.10, edit right here if you want</h3>
+							<ul>
+								<li>New user interface API</li>
+								<li>New modern skin!</li>
+								<li>Inline editing</li>
+								<li>Updated build process</li>
+								<li>Higher quality code</li>
+								<li>Reworked plugins</li>
+								<li>CDN support</li>
+								<li>And MUCH MUCH MORE!</li>
+							</ul>
+						</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Enviar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+

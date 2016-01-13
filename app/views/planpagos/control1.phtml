@@ -1,0 +1,236 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<div class="panel-heading">
+				<h4>Control Plan de Pagos</h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="table-responsive">
+				<?php 
+				$AddEdit_derechollave = 'add_derechollave';
+				$garantia_id = '';
+				$fecha_deposito = '';
+				$nro_deposito = '';
+				$monto_deposito = '';
+				if ($derechollave!=false) { 
+					$garantia_id = $derechollave->id;
+					$fecha_deposito = date("d-m-Y",strtotime($derechollave->fecha_deposito));
+					$nro_deposito = $derechollave->nro_deposito;
+					$monto_deposito = $derechollave->monto_deposito;
+					$AddEdit_derechollave = 'edit_derechollave';
+				 }
+
+				 ?>
+						<table class="table table-vcenter table-striped" style="font-size:12px">
+							<tbody>
+								<tr class="active" id="html_derechollave">
+									<td><a href="javascript:void(0)" id='<?php echo $AddEdit_derechollave ?>' garantia_id='<?php echo $garantia_id ?>' fecha_deposito='<?php echo $fecha_deposito ?>' nro_deposito='<?php echo $nro_deposito ?>' monto_deposito=<?php echo $monto_deposito ?>><strong>DERECHO DE LLAVE </strong></a></td>
+									<td><strong>Fecha Deposito: </strong> <?php echo $fecha_deposito ?></td>
+									<td><strong>Nro Deposito: </strong> <?php echo $nro_deposito ?></td>
+									<td><strong>Monto Depositado: </strong> <?php echo $monto_deposito ?></td>
+									<td colspan="3"></td>
+								</tr>
+								<?php 
+								$AddEdit_garantia = 'add_garantia';
+								$garantia_id = '';
+								$fecha_deposito = '';
+								$nro_deposito = '';
+								$monto_deposito = '';
+
+								$fecha_devolucion = '';
+								$nro_devolucion = '';
+								$monto_devolucion = '';
+
+								if ($garantia!=false) { 
+									$garantia_id = $garantia->id;
+									$fecha_deposito = date("d-m-Y",strtotime($garantia->fecha_deposito));
+									$nro_deposito = $garantia->nro_deposito;
+									$monto_deposito = $garantia->monto_deposito;
+
+									if ($garantia->fecha_devolucion!=null) {
+										$fecha_devolucion = date("d-m-Y",strtotime($garantia->fecha_devolucion));
+									}else{
+										$fecha_devolucion = '';
+									}
+									
+									$nro_devolucion = $garantia->nro_devolucion;
+									$monto_devolucion = $garantia->monto_devolucion;
+									$AddEdit_garantia = 'edit_garantia';
+								}
+								?>
+								<tr class="active" id="html_garantia">
+									<td><a href="javascript:void(0)" id='<?php echo $AddEdit_garantia ?>' garantia_id='<?php echo $garantia_id ?>' fecha_deposito='<?php echo $fecha_deposito ?>' nro_deposito='<?php echo $nro_deposito ?>' monto_deposito=<?php echo $monto_deposito ?> fecha_devolucion='<?php echo $fecha_devolucion ?>' nro_devolucion='<?php echo $nro_devolucion ?>' monto_devolucion=<?php echo $monto_devolucion ?>><strong>GARANTIA </strong></a></td>
+									<td><strong>Fecha Deposito: </strong> <?php echo $fecha_deposito ?></td>
+									<td><strong>Nro Deposito: </strong> <?php echo $nro_deposito ?></td>
+									<td><strong>Monto Depositado: </strong> <?php echo $monto_deposito ?></td>
+									<td><strong>Fecha Devolución: </strong> <?php echo $fecha_devolucion ?></td>
+									<td><strong>Nro Devolución: </strong> <?php echo $nro_devolucion ?></td>
+									<td><strong>Monto Devolución: </strong> <?php echo $monto_devolucion ?></td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+				
+			</div>
+			<div class="row" id="cargar_html">
+					<?php echo $htmlp ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal Registrar deposito -->
+<div class="modal fade" id="myModal_deposito" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm_deposito" data-toggle="validator" action="" method="post" />
+			<input type="hidden" name="contratoproducto_id" id="contratoproducto_id" value="<?php echo $contratoproducto_id ?>">
+			<input type="hidden" name="planpago_id" id="planpago_id" value="">
+			<input type="hidden" name="tipo_deposito" id="tipo_deposito" value="">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo_deposito">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Fecha Deposito</label>
+					<div class="col-md-9">
+						<input type="text" id="fecha_deposito" name="fecha_deposito" class="form-control" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" required/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Nro Deposito</label>
+					<div class="col-md-9">
+						<input type="text" name="nro_deposito" id="nro_deposito" class="form-control" placeholder="" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Monto Depositado Bs.</label>
+					<div class="col-md-9">
+						<input type="text" name="monto_deposito" id="monto_deposito" class="form-control" placeholder="" required>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<!-- Modal Derecho llave -->
+<div class="modal fade" id="myModal_derechollave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm_derechollave" data-toggle="validator" action="" method="post" />
+			<input type="hidden" name="contratoproducto_id" id="contratoproducto_id" value="<?php echo $contratoproducto_id ?>">
+			<input type="hidden" name="garantia_id" id="garantia_id" value="">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo_derechollave">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Fecha Deposito</label>
+					<div class="col-md-9">
+						<input type="text" id="fecha_deposito_derechollave" name="fecha_deposito_derechollave" class="form-control" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" required/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Nro Deposito</label>
+					<div class="col-md-9">
+						<input type="text" name="nro_deposito_derechollave" id="nro_deposito_derechollave" class="form-control" placeholder="" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Monto Depositado Bs.</label>
+					<div class="col-md-9">
+						<input type="text" name="monto_deposito_derechollave" id="monto_deposito_derechollave" class="form-control" placeholder="" required>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<!-- Modal Derecho llave -->
+<div class="modal fade" id="myModal_garantia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm_garantia" data-toggle="validator" action="" method="post" />
+			<!-- <input type="hidden" name="garantia_id" id="garantia_id" value=""> -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo_garantia">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Fecha Deposito</label>
+					<div class="col-md-9">
+						<input type="text" id="fecha_deposito_garantia" name="fecha_deposito_garantia" class="form-control" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" required/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Nro Deposito</label>
+					<div class="col-md-9">
+						<input type="text" name="nro_deposito_garantia" id="nro_deposito_garantia" class="form-control" placeholder="" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Monto Depositado Bs.</label>
+					<div class="col-md-9">
+						<input type="text" name="monto_deposito_garantia" id="monto_deposito_garantia" class="form-control" placeholder="" required>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Fecha Devolución</label>
+					<div class="col-md-9">
+						<input type="text" id="fecha_devolucion_garantia" name="fecha_devolucion_garantia" class="form-control" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Nro Devolución</label>
+					<div class="col-md-9">
+						<input type="text" name="nro_devolucion_garantia" id="nro_devolucion_garantia" class="form-control" placeholder="" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Monto Devolución Bs.</label>
+					<div class="col-md-9">
+						<input type="text" name="monto_devolucion_garantia" id="monto_devolucion_garantia" class="form-control" placeholder="" >
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+<style type="text/css">
+	.datepicker{
+		z-index:1151 !important;
+	}
+</style>

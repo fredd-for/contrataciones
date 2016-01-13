@@ -1,0 +1,168 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel">
+			<ul class="breadcrumb breadcrumb-top">
+				<li><a href="/">Inicio</a></li>
+				<li><a href="/solicitudes/">Solicitudes</a></li>
+				<li class="active">Agregar Productos</li>
+			</ul>
+			<div class="panel-heading">
+				<h4>Solicitud Nro <strong><?php echo $solicitud->nro_solicitud ?></strong></h4>
+				<div class="options">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#domshortcuttiles"><i class="fa fa-users"></i></a></li>
+						<li><a data-toggle="tab" href="#codeshortcuttiles"><i class="fa fa-code"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-borderless table-striped">
+								<tr>
+									<td width="15%"><strong>Cliente Razón Social</strong></td>
+									<td><?php echo $solicitud->razon_social ?></td>
+									<td><strong>Solicitud Nro</strong></td>
+									<td><?php echo $solicitud->nro_solicitud ?></td>
+									<td><strong>Fecha Recepción Solicitud</strong></td>
+									<td><?php echo date("d-m-Y",strtotime($solicitud->fecha_recepcion_solicitud)) ?></td>
+
+								</tr>
+								<tr>
+									<td><strong>Descripción</strong></td>
+									<td colspan="5"><?php echo $solicitud->descripcion_solicitud ?></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<?php echo $this->flashSession->output(); ?>
+							<div id="divMsjeExito" class="msjs-alert" hidden="hidden">
+								<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+								<h5>
+									<i class="fa fa-check-circle"></i>
+									<a class="alert-link" href="javascript:void(0)" id="aMsjeExito"></a>
+								</h5>
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-right">
+								// <?php if ($user->nivel==2 || $user->nivel==1) { ?>
+								<button class="btn btn-sm btn-danger" type="button" id="quitar"><i class="fa fa-trash-o fa-fw"></i> Quitar Producto</button>
+								<?php } ?>
+							</div>
+						</div>
+					</div> 
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="table-responsive">
+								<div id="jqxgrid_sp" style="height: 200px;" ></div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<?php if ($user->nivel==2 || $user->nivel==1) { ?>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-right">
+								<button class="btn btn-sm btn-primary" type="button" id="add_solicitud"><i class="fa fa-plus fa-fw"></i>Añadir a Solicitud</button>
+							</div>
+						</div>
+					</div> 
+					<?php } ?>
+					<div class="row">
+						<div class="col-md-12">
+							<div id="jqxgrid" style="height: 550px; width: 100%;" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Modal añadir a solicitud -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" id="testForm" data-toggle="validator" action="" method="post" />
+			<input type="hidden" name="id" id="id">
+			<input type="hidden" name="solicitud_id" id="solicitud_id" value="<?php echo $solicitud->id ?>">
+			<input type="hidden" name="producto_id" id="producto_id" value="">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="titulo">Editar</h4>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive" id="table_solicitudes">
+					
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<div id="imagen">
+						</div>
+					</div>
+					<div class="col-md-9">
+					<div class="form-group">
+					<label class="col-md-3 control-label">Estación</label>
+					<div class="col-md-9">
+						<input type="text" name="estacion" id="estacion" class="form-control" placeholder="" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Grupo</label>
+					<div class="col-md-9">
+						<input type="text" name="grupo" id="grupo" class="form-control" placeholder="" readonly="">
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Producto</label>
+					<div class="col-md-9">
+						<input type="text" name="producto" id="producto" class="form-control" placeholder="" readonly="">
+					</div>
+				</div>		
+					</div>
+				</div>
+				
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Cantidad</label>
+					<div class="col-md-9">
+						<input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="">
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Tipo Alquiler</label>
+					<div class="col-md-9">
+						<?php echo $tiempo ?>
+					</div>
+				</div>
+				<div class="form-group" >
+					<label class="col-md-3 control-label">Precio Bs. <span id='tiempo_text'></span></label>
+					<div class="col-md-9">
+						<input type="number" name="precio_unitario" id="precio_unitario" class="form-control" required title="campo obligatorio">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-primary" id="Save">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end  modal -->
+
+<style type="text/css">
+	.datepicker{
+		z-index:1151 !important;
+	}
+</style>
