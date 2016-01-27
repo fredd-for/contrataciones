@@ -10,18 +10,28 @@ if (isset($_POST['username'])) {
 <div class="alert alert-danger hide">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <h4>Error!</h4>
-    
 </div>
 
-<!-- END ERROR BOX -->
-<form action="" method="post">
-    <input type="text" name="username" placeholder="Username" value="<?php  echo $user; ?>" class="input-field form-control user" />
-    <input type="password" name="password" placeholder="Password" class="input-field form-control password" />
-    <button type="submit" class="btn btn-login">Ingresar</button>
-</form>
-<div class="login-links">
-    <a href="/login/password">Olvido su contraseña?</a>
-    <br>
-    <a href="/login/password">No tengo cuenta? <strong>Registrarme</strong></a>
+
+<div class="header clearfix">
+    <div class="pull-left"><i class="fa fa-suitcase"></i> CONTRATACIONES</div>
+    <!-- <a href="#"><i class="fa fa-suitcase"></i> <span>Contrataciones</span></a>  -->
 </div>
+<form id="loginform" method="post" action="">
+    <div class="alert alert-warning no-radius no-margin padding-sm"><i class="fa fa-info-circle"></i> Por favor inicie sesión para ingresar al sistema</div>
+    <div class="box-body padding-md">
+        <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Usuario"/>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Contraseña"/>
+        </div>          
+        <!-- <div class="form-group">
+                            <input type="checkbox" /> <small>Remember me</small>
+                        </div>   -->        
+        <div class="box-footer">
+            <button type="submit" class="btn btn-success btn-block">Ingresar</button>  
+        </div>
+    </div>
+</form>
 

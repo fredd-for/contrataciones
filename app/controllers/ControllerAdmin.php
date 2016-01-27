@@ -28,7 +28,7 @@ class ControllerAdmin extends Controller {
             $user_id = $auth['id'];
             $this->_user = usuarios::findFirst("id = '$user_id'");
             //Prepend the application name to the title
-            $this->tag->setTitle('Sistema de Comercialización');
+            $this->tag->setTitle('Sistema de Contrataciones');
           /*  $this->assets
                     ->addCss('/assets/css/bootstrap.min.css')
                     ->addCss('/assets/css/plugins.css')
